@@ -214,8 +214,8 @@ define BATOCERA_NVIDIA_DRIVER_INSTALL_TARGET_CMDS
 	$(BATOCERA_NVIDIA_DRIVER_INSTALL_KERNEL_MODULE)
 
 # batocera install files needed by Vulkan
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_layers.json \
-		$(TARGET_DIR)/usr/share/vulkan/implicit_layer.d/nvidia_layers.json
+#	$(INSTALL) -D -m 0644 $(@D)/nvidia_layers.json \
+#		$(TARGET_DIR)/usr/share/vulkan/implicit_layer.d/nvidia_layers.json
 
 # batocera install files needed by libglvnd
 	$(INSTALL) -D -m 0644 $(@D)/10_nvidia.json \
@@ -224,31 +224,31 @@ define BATOCERA_NVIDIA_DRIVER_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0644 $(@D)/nvidia-drm-outputclass.conf \
 		$(TARGET_DIR)/usr/share/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
-	$(INSTALL) -D -m 0644 $(@D)/libglxserver_nvidia.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	 	$(TARGET_DIR)/usr/lib/xorg/modules/extensions/libglxserver_nvidia.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
-	ln -sf libglxserver_nvidia.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	 	$(TARGET_DIR)/usr/lib/xorg/modules/extensions/libglxserver_nvidia.so
-	ln -sf libglxserver_nvidia.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	 	$(TARGET_DIR)/usr/lib/xorg/modules/extensions/libglxserver_nvidia.so.1
+	$(INSTALL) -D -m 0644 $(@D)/libglx.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
+	 	$(TARGET_DIR)/usr/lib/xorg/modules/extensions/libglx.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
+	ln -sf libglx.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
+	 	$(TARGET_DIR)/usr/lib/xorg/modules/extensions/libglx.so
+	ln -sf libglx.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
+	 	$(TARGET_DIR)/usr/lib/xorg/modules/extensions/libglx.so.1
 
 endef
 
-define BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86_64
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json
-        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/usr/lib/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.i686.json
-        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/lib32/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.i686.json
-endef
+#define BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86_64
+#	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json
+#        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/usr/lib/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json
+#	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.i686.json
+#        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/lib32/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.i686.json
+#endef
 
-define BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.i686.json
-endef
+#define BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86
+#	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_icd.i686.json
+#endef
 
-ifeq ($(BR2_x86_64),y)
-	BATOCERA_NVIDIA_DRIVER_POST_INSTALL_TARGET_HOOKS += BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86_64
-endif
-ifeq ($(BR2_i686),y)
-	BATOCERA_NVIDIA_DRIVER_POST_INSTALL_TARGET_HOOKS += BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86
-endif
+#ifeq ($(BR2_x86_64),y)
+#	BATOCERA_NVIDIA_DRIVER_POST_INSTALL_TARGET_HOOKS += BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86_64
+#endif
+#ifeq ($(BR2_i686),y)
+#	BATOCERA_NVIDIA_DRIVER_POST_INSTALL_TARGET_HOOKS += BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86
+#endif
 
 $(eval $(generic-package))
