@@ -46,8 +46,9 @@ BATOCERA_NVIDIA_DRIVER_LIBS_MISC = \
 	libnvidia-glsi.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
 	libnvidia-tls.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
 	libvdpau_nvidia.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	libnvidia-ml.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	libnvidia-glvkspirv.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
+	libnvidia-ml.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
+# \
+#	libnvidia-glvkspirv.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
 
 BATOCERA_NVIDIA_DRIVER_LIBS += \
 	$(BATOCERA_NVIDIA_DRIVER_LIBS_GL) \
@@ -65,8 +66,9 @@ BATOCERA_NVIDIA_DRIVER_32 = \
 	libnvidia-glsi.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
 	libnvidia-tls.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
 	libvdpau_nvidia.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	libnvidia-ml.so.$(BATOCERA_NVIDIA_DRIVER_VERSION) \
-	libnvidia-glvkspirv.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
+	libnvidia-ml.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
+# \
+# libnvidia-glvkspirv.so.$(BATOCERA_NVIDIA_DRIVER_VERSION)
 
 # Install the gl.pc file
 define BATOCERA_NVIDIA_DRIVER_INSTALL_GL_DEV
